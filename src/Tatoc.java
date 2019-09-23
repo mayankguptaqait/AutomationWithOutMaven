@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.lang.*;
 
 import org.openqa.selenium.By;
@@ -17,16 +18,16 @@ public class Tatoc {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("http://10.0.1.86/tatoc/basic/grid/gate");		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//div[@class='greenbox']")).click();
 		System.out.println("clicked green box");	
 		//Frame Dungeon
 		driver.switchTo().frame("main");
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//
 		WebElement element1 = driver.findElement(By.xpath("//div[text()='Box 1']"));
 		String box1_class = element1.getAttribute("class");
 		System.out.println("box 1 class is "+box1_class);
 		driver.switchTo().frame("child");
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebElement element2 = driver.findElement(By.xpath("//div[text()='Box 2']"));
 		String box2_class = element2.getAttribute("class");
 		System.out.println("box 2 class is "+box2_class);
@@ -57,7 +58,6 @@ public class Tatoc {
     	//Dragged and dropped.		
     	act.dragAndDrop(From, To).build().perform();	
 	   	driver.findElement(By.xpath("//a[text()='Proceed']")).click(); 
-	   	//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	System.out.println("drag and drog");
     	//pop up windows
     	driver.findElement(By.xpath("//a[text()='Launch Popup Window']")).click(); 
